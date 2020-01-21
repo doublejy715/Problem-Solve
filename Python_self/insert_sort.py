@@ -14,11 +14,14 @@ key가 처음부터 끝까지 이동하게 되면 정렬이 완성되게 된다.
 그렇기 때문에 key를 하나씩 정하는 함수 for 1개, 밑의 숫자들을 정렬하기 위한 for문 1개로 할 수 있다.
 '''
 
-data = list()
+data = [6,4,8,13,1,3,7,16]
 def insert_sort(data):
-    for index1 in range(len(data)):                     # 키를 하나씩 옮기기 위한 용도
-        for index2 in range(index1 +1, 0, -1):          #
+    for index1 in range(1,len(data)):                     # 키를 하나씩 옮기기 위한 용도
+        for index2 in range(index1, 0, -1):          #
             if data[index2] < data[index2-1]:
                 data[index2], data[index2-1] = data[index2-1],data[index2]
             else:
                 break
+    return data
+
+print(insert_sort(data))
