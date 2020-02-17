@@ -1,8 +1,9 @@
+import copy
+
 test_case = int(input())
 data = list()
 
-def cal(num):
-    
+
 
 
 for i in range(test_case):

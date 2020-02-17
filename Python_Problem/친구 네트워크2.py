@@ -1,4 +1,38 @@
-def find(x):
+def Find(x):
+    if parrent[x] != x:
+        parrent[x] = Find(parrent[x])
+    return parrent[x]
+
+
+def Union(x,y):
+    parrent_x, parrent_y = Find(x) , Find(y)
+
+    if parrent_x != parrent_y:
+        parrent[parrent_y] = parrent_x
+        number[parrent_x] += number[parrent_y]
+
+test_case = int(input())
+for _ in range(test_case):
+    parrent = dict()
+    number = dict()
+
+    names = int(input())
+    for index in range(names):
+        x, y = input().split()
+        if x not in parrent:
+            parrent[x] = x
+            number[x] = 1
+        if y not in parrent:
+            parrent[y] = y
+            number[y] = 1
+
+        Union(x,y)
+
+        print(number[Find(x)])
+
+
+
+"""def find(x):
     if x == parent[x]:
         return x
     else:
@@ -32,4 +66,6 @@ for _ in range(test_case):
             number[y] = 1
         union(x,y)
 
-    print(number[find(x)])
+    print(number[find(x)])"""
+
+
