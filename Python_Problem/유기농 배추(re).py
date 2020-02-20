@@ -1,28 +1,33 @@
 import sys
-sys.setrecursionlimit(100000)
-def dfs(x,y):
-    visited[x][y] = True
-    directions = [(-1,0),(1,0),(0,-1),(0,1)]
-    for dx,dy in directions:
-        if x+dx<0 or x+dx >= n or y+dy < 0 or y+dy > m: # 구역의 범위부터 지정해 주고
+
+test_case = int(sys.stdin.readline())
+dx,dy = [1,0,-1,0],[0,1,0,-1]
+
+def Bfs(x,y):
+    check[x][y] = 1
+    for i in range(4):
+        XX, YY = x+dx[i], y+dy[i]
+        if check[XX][YY] or not B[XX][YY]:
             continue
-        if array[x+dx][y+dy] and not visited[x+dx][y+dy]: # 해당 조건을 말해준다.
-            dfs(x+dx,y+dy)
+        Bfs(XX,YY)
 
+for _ in range(test_case):
+    # 변수 작성
+    m, n, k = map(int,sys.stdin.readline().split())
+    B = [[0 for index1 in range(m+2)] for index2 in range(n+2)]
+    check = [[0 for index1 in range(m+2)] for index2 in range(n+2)]
 
+    # input() 받기
+    for i in range(k):
+        x, y = map(int,sys.stdin.readline().split())
+        B[y+1][x+1] = 1
 
-for _ in range(int(input())):
-    m,n,k = map(int,input().split())
-    array = [[0]*m for _ in range(n)] # 2차원 배열을 지정할 때는 이렇게 한다.
-    visited = [[False]*m for _ in range(n)]
-    for _ in range(k):
-        y, x = map(int,input().split())
-        array[x][y] = 1
     result = 0
+    for x in range(1,n+1):
+        for y in range(1,m+1):
+            if check[x][y] or not B[x][y]:
+                continue
+            Bfs(x,y)
+            result += 1
 
-    for i in range(n):
-        for j in range(m):
-            if array[i][j] and not visited[i][j]: # array에서 1이고, visited[i][j]가 True가 아니라면, False
-                dfs(i,j)
-                result += 1
     print(result)

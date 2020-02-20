@@ -30,8 +30,8 @@ def mergesplit(data):
 
 
 result1 = list()
-N,K = map(int,input().split(' '))
-data = list(map(int,input().split(' ')))
+N,K = map(int,input().split())
+data = list(map(int,input().split()))
 
 result1 = mergesplit(data)
 print(result1[K-1])
